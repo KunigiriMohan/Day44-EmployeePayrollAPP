@@ -23,15 +23,32 @@ window.addEventListener('DOMContentLoaded',(event)=>{
         output.textContent=salary.value;
     });
 });
-
+/**save() method to save data */
 const save = () =>{                                                 //save function to save the details
     try{
         let employeePayrollData=createEmployeePayroll();
+        createAndUpdateStorage(employeePayrollData);
     }
     catch (e){
         return;
     }
 }
+/**CreateAndUpdateStorage() method to save it to local storage  */
+function createAndUpdateStorage(employeePayrollData){
+        
+    let employeePayrollList = JSON.parse(localStorage.getItem("EmployeePayrollList"));
+
+    if(employeePayrollList != undefined){
+    employeePayrollList.push(employeePayrollData);
+    }
+    else{
+        employeePayrollList = [EmployeePayrollData]
+    }
+    alert(employeePayrollList.toString());
+    localStorage.setItem("EmployeePayrollList",JSON.stringify(employeePayrollList))
+}
+
+
 const createEmployeePayroll= () =>{                                         //inserting try catch block to catch error trown when name is entered wrong
     let employeePayrollData = new EmployeePayrollData();
     try{
@@ -62,7 +79,9 @@ const getSelectedValues = (propertyValue) => {
     });
     return setItems;
 }
-/**getInputValueById() method to verify values. and modify date in require format */
+/**getInputValueById() method to verify values. and modify date in require format]
+ * 
+ */
 const getInputValueById = (id) => {
     let value = document.querySelector(id).value;
     return value;
