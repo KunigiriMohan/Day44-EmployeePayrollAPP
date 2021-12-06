@@ -7,7 +7,7 @@ window.addEventListener('DOMContentLoaded',(event)=>{
             textError.textContent="";
             return;
         }
-        try{
+        try{                                                                //Try catch block to catch error thrown when name entered is according to regex.
             (new EmployeePayrollData()).name=name.value;;
             textError.textContent="";
         }
@@ -15,7 +15,7 @@ window.addEventListener('DOMContentLoaded',(event)=>{
             textError.textContent=e;
         }
     });
-    const salary= document.querySelector('#salary');
+    const salary= document.querySelector('#salary');                        //Event Handler to update value when we scroll salary column
     const output =document.querySelector('.salary-output');
 
     output.textContent=salary.value;
@@ -23,3 +23,52 @@ window.addEventListener('DOMContentLoaded',(event)=>{
         output.textContent=salary.value;
     });
 });
+
+const save = () =>{                                                 //save function to save the details
+    try{
+        let employeePayrollData=createEmployeePayroll();
+    }
+    catch (e){
+        return;
+    }
+}
+const createEmployeePayroll= () =>{                                         //inserting try catch block to catch error trown when name is entered wrong
+    let employeePayrollData = new EmployeePayrollData();
+    try{
+        employeePayrollData.name = getInputValueById('#name');
+    }
+    catch (e){
+        setTextValue('.text-error',e);
+        throw e;
+    }
+                                                                                            //taking all user input values and setting latest values for name,gender.
+    employeePayrollData.profilePic=getSelectedValues('[name=profile]').pop();
+    employeePayrollData.gender=getSelectedValues('[name=gender]').pop();
+    employeePayrollData.department=getSelectedValues('#salary');
+    employeePayrollData.salary=getSelectedValues('#notes');
+    
+    let date=getInputValueById('#day')+getInputValueById('#month')+" "+getInputValueById('#year');
+
+    employeePayrollData.date=Date.parse(date);
+    alert("Details Entered");
+    return employeePayrollData;
+}
+/* getSelectedValues() method to push all the values entered by user to array of setItems*/
+const getSelectedValues = (propertyValue) => {
+    let allItems =document.querySelectorAll(propertyValue);
+    let setItems = [];
+    allItems.forEach(item => {
+        if(item.checked) setItems.push(item.value);
+    });
+    return setItems;
+}
+/**getInputValueById() method to verify values. and modify date in require format */
+const getInputValueById = (id) => {
+    let value = document.querySelector(id).value;
+    return value;
+}
+/*getInputElementValue() method to take input values  */
+const getInputElementValue = (id) => {
+    let value =document.getElementById(id).value;
+    return value;
+}
