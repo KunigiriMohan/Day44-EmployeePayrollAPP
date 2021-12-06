@@ -151,6 +151,12 @@ select{
     text-decoration: none;
     text-align: center;
 }
+error-output{
+    margin-left: 10px;
+    font-size: 12px;
+    font-style: italic;
+    color: red;
+}
 /*Writing Media Queries */
 
 @media only screen and (max-width:960px) {
@@ -189,10 +195,7 @@ select{
         align-items: flex-start;
     }
     /*Deining design for error*/
-    error-output{
-        margin-left: 10px;
-        font-size: 12px;
-        font-style: italic;
-        color: red;
-    }
+    
+    
+    
 }
