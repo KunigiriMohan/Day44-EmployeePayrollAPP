@@ -67,7 +67,7 @@ const createEmployeePayroll= () =>{                                         //in
     let date=getInputValueById('#day')+getInputValueById('#month')+" "+getInputValueById('#year');
 
     employeePayrollData.date=Date.parse(date);
-    alert("Details Entered");
+    alert(employeePayrollData.toString());
     return employeePayrollData;
 }
 /* getSelectedValues() method to push all the values entered by user to array of setItems*/
